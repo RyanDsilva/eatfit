@@ -1,22 +1,23 @@
+import 'package:eatfit/router.dart';
 import 'package:flutter/material.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  FluroRouter.setupRouter();
+  runApp(EatFit());
+}
 
-class MyApp extends StatelessWidget {
+class EatFit extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'EatFit',
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('EatFit'),
-        ),
-        body: Center(
-          child: Container(
-            child: Text('Hello World'),
-          ),
-        ),
+      theme: ThemeData(
+        primaryColor: Colors.deepPurple,
+        accentColor: Colors.yellow,
+        primarySwatch: Colors.deepPurple,
       ),
+      initialRoute: '/',
+      onGenerateRoute: FluroRouter.router.generator,
     );
   }
 }
