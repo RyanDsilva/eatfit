@@ -6,7 +6,7 @@ class Exercise extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Text("Exercise"),
+      child: Text("Exercise Home"),
     );
   }
 }

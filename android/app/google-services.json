@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "590070906513",
+    "firebase_url": "https://eatfit-sem7.firebaseio.com",
+    "project_id": "eatfit-sem7",
+    "storage_bucket": "eatfit-sem7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:590070906513:android:cf1b0d0276893a56",
+        "android_client_info": {
+          "package_name": "dev.ryandsilva.eatfit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "590070906513-p3alvuovnlv7q74cnogi4qkv3asqsuge.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "dev.ryandsilva.eatfit",
+            "certificate_hash": "e17d084e53c570fedadeb0c03d0d5ca30b8ce5d3"
+          }
+        },
+        {
+          "client_id": "590070906513-gerqimmsnloc77pub82107sakkrll8mk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBfUq4_M5AnUBtXc8K2WfmO7ViKtoT31yk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "590070906513-gerqimmsnloc77pub82107sakkrll8mk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
