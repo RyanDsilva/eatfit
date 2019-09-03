@@ -15,7 +15,7 @@ class _RootState extends State<Root> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Eat-Fit"),
+        title: Text("EatFit"),
         centerTitle: true,
       ),
       body: this.widget.child,
