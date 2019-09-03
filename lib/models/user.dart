@@ -7,6 +7,7 @@ import 'meal.dart';
 class User with ChangeNotifier {
   String id;
   String name;
+  String email;
   List<Meal> meals;
   int currentCalories;
   int lifestyleChoice;
@@ -16,6 +17,7 @@ class User with ChangeNotifier {
       {this.id,
       this.name,
       this.meals,
+      this.email,
       this.currentCalories,
       this.lifestyleChoice,
       this.gender});
@@ -25,6 +27,7 @@ class User with ChangeNotifier {
     return User(
       id: doc.documentID,
       name: data['name'] ?? '',
+      email: data['email'] ?? '',
       currentCalories: data['currentCalories'] ?? 0,
       meals: data['meals'].map((meal) => Meal.fromFirestore(meal)) ?? [],
       lifestyleChoice: data['lifestyleChoice'] ?? Calorie.MALE_MAINTAIN,
@@ -34,6 +37,7 @@ class User with ChangeNotifier {
 
   getName() => this.name;
   getID() => this.id;
+  getEmail() => this.email;
   getMeals() => this.meals;
   getCurrentCalories() => this.currentCalories;
   getLifestyleChoice() => this.lifestyleChoice;

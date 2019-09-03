@@ -23,6 +23,7 @@ class EatFit extends StatelessWidget {
           primaryColor: Colors.deepPurple,
           accentColor: Colors.yellow,
           primarySwatch: Colors.deepPurple,
+          canvasColor: Colors.transparent,
           fontFamily: 'Montserrat',
         ),
         initialRoute: 'home',

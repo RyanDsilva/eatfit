@@ -1,4 +1,5 @@
 import 'package:eatfit/components/root.dart';
+import 'package:eatfit/views/auth.dart';
 import 'package:eatfit/views/chat.dart';
 import 'package:eatfit/views/exercise/doExercise.dart';
 import 'package:eatfit/views/exercise/exerciseHome.dart';
@@ -6,6 +7,7 @@ import 'package:eatfit/views/food.dart';
 import 'package:eatfit/views/home.dart';
 import 'package:eatfit/views/settings.dart';
 import 'package:eatfit/views/snap.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluro/fluro.dart';
 
@@ -14,11 +16,27 @@ class FluroRouter {
 
   static Handler _homeHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, dynamic> params) {
-      return Root(
-        child: Home(),
-      );
+      print(_getCurrentUser().toString());
+      FirebaseUser user;
+      _getCurrentUser().then((fbUser) {
+        user = fbUser;
+        print(user.toString());
+      });
+      if (_getCurrentUser() != null) {
+        return Root(
+          child: Home(
+            user: user,
+          ),
+        );
+      } else {
+        return Auth();
+      }
     },
   );
+
+  static Future<FirebaseUser> _getCurrentUser() async {
+    return await FirebaseAuth.instance.currentUser();
+  }
 
   static Handler _exerciseHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, dynamic> params) {

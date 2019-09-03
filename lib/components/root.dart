@@ -1,4 +1,5 @@
 import 'package:eatfit/components/bottomAppBar.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class Root extends StatefulWidget {
@@ -54,7 +55,8 @@ class _RootState extends State<Root> {
         Navigator.pushReplacementNamed(context, 'exercise');
         break;
       case 3:
-        Navigator.pushReplacementNamed(context, 'settings');
+        FirebaseAuth.instance.signOut();
+        Navigator.pushReplacementNamed(context, 'home');
         break;
       default:
         print(index);
