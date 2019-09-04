@@ -15,6 +15,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Container(
       child: Text(this.widget.user.email),
+      color: Colors.white,
     );
   }
 }

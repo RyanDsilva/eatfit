@@ -39,30 +39,32 @@ class _AuthState extends State<Auth> {
           child: Stack(
             children: <Widget>[
               Positioned(
-                  child: Container(
-                child: Align(
-                  child: Container(
-                    decoration: BoxDecoration(
-                        shape: BoxShape.circle, color: Colors.white),
-                    width: 175,
-                    height: 175,
+                child: Container(
+                  child: Align(
+                    child: Container(
+                      decoration: BoxDecoration(
+                          shape: BoxShape.circle, color: Colors.white),
+                      width: 175,
+                      height: 175,
+                    ),
                   ),
+                  height: 154,
                 ),
-                height: 154,
-              )),
+              ),
               Positioned(
                 child: Container(
-                    height: 154,
-                    child: Align(
-                      child: Text(
-                        "EatFit",
-                        style: TextStyle(
-                          fontSize: 48,
-                          fontWeight: FontWeight.bold,
-                          color: Theme.of(context).primaryColor,
-                        ),
+                  height: 154,
+                  child: Align(
+                    child: Text(
+                      "EatFit",
+                      style: TextStyle(
+                        fontSize: 48,
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).primaryColor,
                       ),
-                    )),
+                    ),
+                  ),
+                ),
               ),
               Positioned(
                 width: MediaQuery.of(context).size.width * 0.15,
@@ -71,7 +73,9 @@ class _AuthState extends State<Auth> {
                 right: MediaQuery.of(context).size.width * 0.22,
                 child: Container(
                   decoration: BoxDecoration(
-                      shape: BoxShape.circle, color: Colors.white),
+                    shape: BoxShape.circle,
+                    color: Colors.white,
+                  ),
                 ),
               ),
               Positioned(
@@ -81,7 +85,9 @@ class _AuthState extends State<Auth> {
                 right: MediaQuery.of(context).size.width * 0.32,
                 child: Container(
                   decoration: BoxDecoration(
-                      shape: BoxShape.circle, color: Colors.white),
+                    shape: BoxShape.circle,
+                    color: Colors.white,
+                  ),
                 ),
               ),
             ],
@@ -139,11 +145,15 @@ class _AuthState extends State<Auth> {
         elevation: 0.0,
         color: fillColor,
         shape: RoundedRectangleBorder(
-            borderRadius: new BorderRadius.circular(30.0)),
+          borderRadius: new BorderRadius.circular(30.0),
+        ),
         child: Text(
           text,
           style: TextStyle(
-              fontWeight: FontWeight.bold, color: textColor, fontSize: 20),
+            fontWeight: FontWeight.bold,
+            color: textColor,
+            fontSize: 20,
+          ),
         ),
         onPressed: () {
           function();
@@ -159,7 +169,6 @@ class _AuthState extends State<Auth> {
       final FirebaseUser user = (await firebaseAuth.signInWithEmailAndPassword(
               email: _email, password: _password))
           .user;
-      //firebaseAuth.currentUser().then((user) => print(user.toString()));
       Navigator.pushReplacementNamed(context, "home", arguments: user);
     }
 
@@ -186,11 +195,12 @@ class _AuthState extends State<Auth> {
     void _loginSheet() {
       _scaffoldKey.currentState.showBottomSheet<void>((BuildContext context) {
         return DecoratedBox(
-          decoration: BoxDecoration(color: Theme.of(context).canvasColor),
+          decoration: BoxDecoration(color: Colors.transparent),
           child: ClipRRect(
             borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(40.0),
-                topRight: Radius.circular(40.0)),
+              topLeft: Radius.circular(40.0),
+              topRight: Radius.circular(40.0),
+            ),
             child: Container(
               child: ListView(
                 children: <Widget>[
@@ -232,8 +242,9 @@ class _AuthState extends State<Auth> {
                                     width: 150,
                                     height: 150,
                                     decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        color: Theme.of(context).primaryColor),
+                                      shape: BoxShape.circle,
+                                      color: Theme.of(context).primaryColor,
+                                    ),
                                   ),
                                   alignment: Alignment.center,
                                 ),
@@ -256,25 +267,40 @@ class _AuthState extends State<Auth> {
                         ),
                         Padding(
                           padding: EdgeInsets.only(bottom: 20, top: 60),
-                          child: _input(Icon(Icons.email), "EMAIL",
-                              _emailController, false),
+                          child: _input(
+                            Icon(Icons.email),
+                            "EMAIL",
+                            _emailController,
+                            false,
+                          ),
                         ),
                         Padding(
                           padding: EdgeInsets.only(bottom: 20),
-                          child: _input(Icon(Icons.lock), "PASSWORD",
-                              _passwordController, true),
+                          child: _input(
+                            Icon(Icons.lock),
+                            "PASSWORD",
+                            _passwordController,
+                            true,
+                          ),
                         ),
                         SizedBox(
                           height: 20,
                         ),
                         Padding(
                           padding: EdgeInsets.only(
-                              left: 20,
-                              right: 20,
-                              bottom: MediaQuery.of(context).viewInsets.bottom),
+                            left: 20,
+                            right: 20,
+                            bottom: MediaQuery.of(context).viewInsets.bottom,
+                          ),
                           child: Container(
-                            child: _button("LOGIN", Colors.white, primary,
-                                primary, Colors.white, _loginUser),
+                            child: _button(
+                              "LOGIN",
+                              Colors.white,
+                              primary,
+                              primary,
+                              Colors.white,
+                              _loginUser,
+                            ),
                             height: 50,
                             width: MediaQuery.of(context).size.width,
                           ),
@@ -299,11 +325,12 @@ class _AuthState extends State<Auth> {
     void _registerSheet() {
       _scaffoldKey.currentState.showBottomSheet<void>((BuildContext context) {
         return DecoratedBox(
-          decoration: BoxDecoration(color: Theme.of(context).canvasColor),
+          decoration: BoxDecoration(color: Colors.transparent),
           child: ClipRRect(
             borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(40.0),
-                topRight: Radius.circular(40.0)),
+              topLeft: Radius.circular(40.0),
+              topRight: Radius.circular(40.0),
+            ),
             child: Container(
               child: ListView(
                 children: <Widget>[
@@ -345,8 +372,9 @@ class _AuthState extends State<Auth> {
                                   width: 150,
                                   height: 150,
                                   decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color: Theme.of(context).primaryColor),
+                                    shape: BoxShape.circle,
+                                    color: Theme.of(context).primaryColor,
+                                  ),
                                 ),
                                 alignment: Alignment.center,
                               ),
@@ -372,29 +400,48 @@ class _AuthState extends State<Auth> {
                           bottom: 20,
                           top: 60,
                         ),
-                        child: _input(Icon(Icons.account_circle), "NAME",
-                            _nameController, false),
+                        child: _input(
+                          Icon(Icons.account_circle),
+                          "NAME",
+                          _nameController,
+                          false,
+                        ),
                       ),
                       Padding(
                         padding: EdgeInsets.only(
                           bottom: 20,
                         ),
-                        child: _input(Icon(Icons.email), "EMAIL",
-                            _emailController, false),
+                        child: _input(
+                          Icon(Icons.email),
+                          "EMAIL",
+                          _emailController,
+                          false,
+                        ),
                       ),
                       Padding(
                         padding: EdgeInsets.only(bottom: 20),
-                        child: _input(Icon(Icons.lock), "PASSWORD",
-                            _passwordController, true),
+                        child: _input(
+                          Icon(Icons.lock),
+                          "PASSWORD",
+                          _passwordController,
+                          true,
+                        ),
                       ),
                       Padding(
                         padding: EdgeInsets.only(
-                            left: 20,
-                            right: 20,
-                            bottom: MediaQuery.of(context).viewInsets.bottom),
+                          left: 20,
+                          right: 20,
+                          bottom: MediaQuery.of(context).viewInsets.bottom,
+                        ),
                         child: Container(
-                          child: _button("REGISTER", Colors.white, primary,
-                              primary, Colors.white, _registerUser),
+                          child: _button(
+                            "REGISTER",
+                            Colors.white,
+                            primary,
+                            primary,
+                            Colors.white,
+                            _registerUser,
+                          ),
                           height: 50,
                           width: MediaQuery.of(context).size.width,
                         ),
@@ -416,61 +463,73 @@ class _AuthState extends State<Auth> {
     }
 
     return Scaffold(
-        resizeToAvoidBottomPadding: false,
-        key: _scaffoldKey,
-        backgroundColor: Theme.of(context).primaryColor,
-        body: Column(
-          children: <Widget>[
-            logo(),
-            Padding(
-              child: Container(
-                child: _button("LOGIN", primary, Colors.white, Colors.white,
-                    primary, _loginSheet),
-                height: 50,
+      resizeToAvoidBottomPadding: false,
+      key: _scaffoldKey,
+      backgroundColor: Theme.of(context).primaryColor,
+      body: Column(
+        children: <Widget>[
+          logo(),
+          Padding(
+            child: Container(
+              child: _button(
+                "LOGIN",
+                primary,
+                Colors.white,
+                Colors.white,
+                primary,
+                _loginSheet,
               ),
-              padding: EdgeInsets.only(top: 80, left: 20, right: 20),
+              height: 50,
             ),
-            Padding(
-              child: Container(
-                child: OutlineButton(
-                  highlightedBorderColor: Colors.white,
-                  borderSide: BorderSide(color: Colors.white, width: 2.0),
-                  highlightElevation: 0.0,
-                  splashColor: Colors.white,
-                  highlightColor: Theme.of(context).primaryColor,
-                  color: Theme.of(context).primaryColor,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: new BorderRadius.circular(30.0),
-                  ),
-                  child: Text(
-                    "REGISTER",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                        fontSize: 20),
-                  ),
-                  onPressed: () {
-                    _registerSheet();
-                  },
+            padding: EdgeInsets.only(
+              top: 80,
+              left: 20,
+              right: 20,
+            ),
+          ),
+          Padding(
+            child: Container(
+              child: OutlineButton(
+                highlightedBorderColor: Colors.white,
+                borderSide: BorderSide(color: Colors.white, width: 2.0),
+                highlightElevation: 0.0,
+                splashColor: Colors.white,
+                highlightColor: Theme.of(context).primaryColor,
+                color: Theme.of(context).primaryColor,
+                shape: RoundedRectangleBorder(
+                  borderRadius: new BorderRadius.circular(30.0),
                 ),
-                height: 50,
-              ),
-              padding: EdgeInsets.only(top: 10, left: 20, right: 20),
-            ),
-            Expanded(
-              child: Align(
-                child: ClipPath(
-                  child: Container(
+                child: Text(
+                  "REGISTER",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
                     color: Colors.white,
-                    height: 300,
+                    fontSize: 20,
                   ),
-                  clipper: BottomWaveClipper(),
                 ),
-                alignment: Alignment.bottomCenter,
+                onPressed: () {
+                  _registerSheet();
+                },
               ),
-            )
-          ],
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-        ));
+              height: 50,
+            ),
+            padding: EdgeInsets.only(top: 10, left: 20, right: 20),
+          ),
+          Expanded(
+            child: Align(
+              child: ClipPath(
+                child: Container(
+                  color: Colors.white,
+                  height: 300,
+                ),
+                clipper: BottomWaveClipper(),
+              ),
+              alignment: Alignment.bottomCenter,
+            ),
+          )
+        ],
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+      ),
+    );
   }
 }

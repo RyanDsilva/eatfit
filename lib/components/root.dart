@@ -49,10 +49,10 @@ class _RootState extends State<Root> {
         Navigator.pushReplacementNamed(context, 'home');
         break;
       case 1:
-        Navigator.pushReplacementNamed(context, 'food');
+        Navigator.pushNamed(context, 'food');
         break;
       case 2:
-        Navigator.pushReplacementNamed(context, 'exercise');
+        Navigator.pushNamed(context, 'exercise');
         break;
       case 3:
         FirebaseAuth.instance.signOut();

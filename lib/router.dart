@@ -5,6 +5,7 @@ import 'package:eatfit/views/exercise/doExercise.dart';
 import 'package:eatfit/views/exercise/exerciseHome.dart';
 import 'package:eatfit/views/food.dart';
 import 'package:eatfit/views/home.dart';
+import 'package:eatfit/views/landing.dart';
 import 'package:eatfit/views/settings.dart';
 import 'package:eatfit/views/snap.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -16,27 +17,9 @@ class FluroRouter {
 
   static Handler _homeHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, dynamic> params) {
-      print(_getCurrentUser().toString());
-      FirebaseUser user;
-      _getCurrentUser().then((fbUser) {
-        user = fbUser;
-        print(user.toString());
-      });
-      if (_getCurrentUser() != null) {
-        return Root(
-          child: Home(
-            user: user,
-          ),
-        );
-      } else {
-        return Auth();
-      }
+      return Landing();
     },
   );
-
-  static Future<FirebaseUser> _getCurrentUser() async {
-    return await FirebaseAuth.instance.currentUser();
-  }
 
   static Handler _exerciseHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, dynamic> params) {
@@ -87,12 +70,40 @@ class FluroRouter {
   );
 
   static void setupRouter() {
-    router.define('home', handler: _homeHandler);
-    router.define('exercise', handler: _exerciseHandler);
-    router.define('snap', handler: _snapHandler);
-    router.define('food', handler: _foodHandler);
-    router.define('chat', handler: _chatHandler);
-    router.define('exercise/do', handler: _doExerciseHandler);
-    router.define('settings', handler: _settingsHandler);
+    router.define(
+      'home',
+      handler: _homeHandler,
+      transitionType: TransitionType.material,
+    );
+    router.define(
+      'exercise',
+      handler: _exerciseHandler,
+      transitionType: TransitionType.material,
+    );
+    router.define(
+      'snap',
+      handler: _snapHandler,
+      transitionType: TransitionType.material,
+    );
+    router.define(
+      'food',
+      handler: _foodHandler,
+      transitionType: TransitionType.material,
+    );
+    router.define(
+      'chat',
+      handler: _chatHandler,
+      transitionType: TransitionType.material,
+    );
+    router.define(
+      'exercise/do',
+      handler: _doExerciseHandler,
+      transitionType: TransitionType.material,
+    );
+    router.define(
+      'settings',
+      handler: _settingsHandler,
+      transitionType: TransitionType.material,
+    );
   }
 }
