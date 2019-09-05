@@ -42,7 +42,7 @@ packages:
       name: cloud_firestore
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.12.9+2"
+    version: "0.12.9+3"
   collection:
     dependency: transitive
     description:
@@ -110,19 +110,12 @@ packages:
       name: flutter_launcher_icons
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.7.2+1"
+    version: "0.7.3"
   flutter_test:
     dependency: "direct dev"
     description: flutter
     source: sdk
     version: "0.0.0"
-  font_awesome_flutter:
-    dependency: "direct main"
-    description:
-      name: font_awesome_flutter
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "8.5.0"
   image:
     dependency: transitive
     description:
@@ -130,6 +123,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.4"
+  image_picker_modern:
+    dependency: "direct main"
+    description:
+      name: image_picker_modern
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.4.12+1"
   matcher:
     dependency: transitive
     description:

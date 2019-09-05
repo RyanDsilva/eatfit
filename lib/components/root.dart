@@ -21,7 +21,7 @@ class _RootState extends State<Root> {
       ),
       body: this.widget.child,
       floatingActionButton: FloatingActionButton(
-        onPressed: () => Navigator.pushReplacementNamed(context, 'snap'),
+        onPressed: () => Navigator.pushReplacementNamed(context, 'snap/1'),
         tooltip: 'Action',
         child: Icon(
           Icons.add,

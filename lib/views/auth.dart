@@ -16,19 +16,19 @@ class _AuthState extends State<Auth> {
   String _email;
   String _password;
   String _displayName;
-  bool _obsecure = false;
   bool isLoading = false;
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   final Firestore db = Firestore.instance;
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     Color primary = Theme.of(context).primaryColor;
-    void initState() {
-      super.initState();
-    }
 
-    //GO logo widget
     Widget logo() {
       return Padding(
         padding:
@@ -43,7 +43,9 @@ class _AuthState extends State<Auth> {
                   child: Align(
                     child: Container(
                       decoration: BoxDecoration(
-                          shape: BoxShape.circle, color: Colors.white),
+                        shape: BoxShape.circle,
+                        color: Colors.white,
+                      ),
                       width: 175,
                       height: 175,
                     ),
@@ -108,29 +110,30 @@ class _AuthState extends State<Auth> {
             fontSize: 20,
           ),
           decoration: InputDecoration(
-              hintStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-              hintText: hint,
-              enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(30),
-                borderSide: BorderSide(
-                  color: Theme.of(context).primaryColor,
-                  width: 2,
-                ),
+            hintStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+            hintText: hint,
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(30),
+              borderSide: BorderSide(
+                color: Theme.of(context).primaryColor,
+                width: 2,
               ),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(30),
-                borderSide: BorderSide(
-                  color: Theme.of(context).primaryColor,
-                  width: 3,
-                ),
+            ),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(30),
+              borderSide: BorderSide(
+                color: Theme.of(context).primaryColor,
+                width: 3,
               ),
-              prefixIcon: Padding(
-                child: IconTheme(
-                  data: IconThemeData(color: Theme.of(context).primaryColor),
-                  child: icon,
-                ),
-                padding: EdgeInsets.only(left: 30, right: 10),
-              )),
+            ),
+            prefixIcon: Padding(
+              child: IconTheme(
+                data: IconThemeData(color: Theme.of(context).primaryColor),
+                child: icon,
+              ),
+              padding: EdgeInsets.only(left: 30, right: 10),
+            ),
+          ),
         ),
       );
     }
@@ -162,6 +165,11 @@ class _AuthState extends State<Auth> {
     }
 
     void _loginUser() async {
+      _scaffoldKey.currentState.showSnackBar(
+        new SnackBar(
+          content: Text("Logging you in ..."),
+        ),
+      );
       _email = _emailController.text;
       _password = _passwordController.text;
       _emailController.clear();
@@ -173,6 +181,11 @@ class _AuthState extends State<Auth> {
     }
 
     void _registerUser() async {
+      _scaffoldKey.currentState.showSnackBar(
+        new SnackBar(
+          content: Text("Signing you up ..."),
+        ),
+      );
       _email = _emailController.text;
       _password = _passwordController.text;
       _displayName = _nameController.text;

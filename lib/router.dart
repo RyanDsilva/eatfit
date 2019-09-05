@@ -1,14 +1,11 @@
 import 'package:eatfit/components/root.dart';
-import 'package:eatfit/views/auth.dart';
 import 'package:eatfit/views/chat.dart';
 import 'package:eatfit/views/exercise/doExercise.dart';
 import 'package:eatfit/views/exercise/exerciseHome.dart';
 import 'package:eatfit/views/food.dart';
-import 'package:eatfit/views/home.dart';
 import 'package:eatfit/views/landing.dart';
 import 'package:eatfit/views/settings.dart';
 import 'package:eatfit/views/snap.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluro/fluro.dart';
 
@@ -81,7 +78,7 @@ class FluroRouter {
       transitionType: TransitionType.material,
     );
     router.define(
-      'snap',
+      'snap/:value',
       handler: _snapHandler,
       transitionType: TransitionType.material,
     );
