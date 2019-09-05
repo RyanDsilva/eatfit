@@ -24,13 +24,13 @@ class _SnapState extends State<Snap> {
 
   Future getImage(int value) async {
     switch (value) {
-      case 1:
+      case 0:
         var image = await ImagePicker.pickImage(source: ImageSource.camera);
         setState(() {
           _image = image;
         });
         break;
-      case 2:
+      case 1:
         var image = await ImagePicker.pickImage(source: ImageSource.gallery);
         setState(() {
           _image = image;
@@ -43,30 +43,42 @@ class _SnapState extends State<Snap> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: <Widget>[
-        new CustomCard(
-          bgColor: Colors.black12,
-          content: new Container(
-            margin: EdgeInsets.all(10),
-            padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
-            child: new Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                Center(
-                  child: _image == null
-                      ? Text('No image selected.')
-                      : Image.file(_image),
+    return SingleChildScrollView(
+      child: new CustomCard(
+        bgColor: Colors.black12,
+        content: new Container(
+          margin: EdgeInsets.all(10),
+          padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
+          child: new Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              Center(
+                child: _image == null
+                    ? Text('No image selected.')
+                    : Image.file(_image),
+              ),
+              Padding(
+                child: Text("food_name"),
+                padding: EdgeInsets.all(10),
+              ),
+              Padding(
+                child: RaisedButton(
+                  onPressed: () => print("Clicked!"),
+                  child: Text(
+                    "Add",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  color: Theme.of(context).primaryColor,
                 ),
-                Padding(
-                  child: Text("food_name"),
-                  padding: EdgeInsets.all(10),
-                )
-              ],
-            ),
+                padding: EdgeInsets.all(5),
+              )
+            ],
           ),
         ),
-      ],
+      ),
     );
   }
 }

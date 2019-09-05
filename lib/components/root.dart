@@ -14,6 +14,10 @@ class Root extends StatefulWidget {
 class _RootState extends State<Root> {
   @override
   Widget build(BuildContext context) {
+    var _items = [
+      {'icon': Icon(Icons.photo_camera), 'text': Text("Camera")},
+      {'icon': Icon(Icons.photo), 'text': Text("Gallery")}
+    ];
     return Scaffold(
       appBar: AppBar(
         title: Text("EatFit"),
@@ -21,7 +25,25 @@ class _RootState extends State<Root> {
       ),
       body: this.widget.child,
       floatingActionButton: FloatingActionButton(
-        onPressed: () => Navigator.pushReplacementNamed(context, 'snap/2'),
+        onPressed: () => showModalBottomSheet(
+            context: context,
+            builder: (BuildContext context) {
+              return ListView.separated(
+                shrinkWrap: true,
+                separatorBuilder: (context, index) => Divider(
+                  color: Colors.black26,
+                ),
+                itemCount: 2,
+                itemBuilder: (context, index) => Padding(
+                  padding: EdgeInsets.all(10),
+                  child: ListTile(
+                    title: _items[index]['text'],
+                    leading: _items[index]['icon'],
+                    onTap: () => Navigator.pushNamed(context, "snap/$index"),
+                  ),
+                ),
+              );
+            }),
         tooltip: 'Action',
         child: Icon(
           Icons.add,
