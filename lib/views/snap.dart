@@ -1,10 +1,14 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:image_picker_modern/image_picker_modern.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:eatfit/components/customCard.dart';
 
 class Snap extends StatefulWidget {
+  final int value;
+
+  const Snap({Key key, this.value}) : super(key: key);
+
   @override
   _SnapState createState() => _SnapState();
 }
@@ -15,14 +19,26 @@ class _SnapState extends State<Snap> {
   @override
   initState() {
     super.initState();
-    getImage();
+    getImage(this.widget.value);
   }
 
-  Future getImage() async {
-    var image = await ImagePicker.pickImage(source: ImageSource.camera);
-    setState(() {
-      _image = image;
-    });
+  Future getImage(int value) async {
+    switch (value) {
+      case 1:
+        var image = await ImagePicker.pickImage(source: ImageSource.camera);
+        setState(() {
+          _image = image;
+        });
+        break;
+      case 2:
+        var image = await ImagePicker.pickImage(source: ImageSource.gallery);
+        setState(() {
+          _image = image;
+        });
+        break;
+      default:
+        print("Wrong Choice");
+    }
   }
 
   @override

@@ -29,7 +29,9 @@ class FluroRouter {
   static Handler _snapHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, dynamic> params) {
       return Root(
-        child: Snap(),
+        child: Snap(
+          value: int.parse(params["value"][0]),
+        ),
       );
     },
   );
