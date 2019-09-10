@@ -20,9 +20,9 @@ class EatFit extends StatelessWidget {
       child: MaterialApp(
         title: 'EatFit',
         theme: ThemeData(
-          primaryColor: Colors.deepPurple,
-          accentColor: Colors.yellow,
-          primarySwatch: Colors.deepPurple,
+          primaryColor: Color(0xFF01161E),
+          accentColor: Color(0xFF92DCE5),
+          errorColor: Color(0xFFD64933),
           //canvasColor: Colors.transparent,
           fontFamily: 'Montserrat',
         ),

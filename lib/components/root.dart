@@ -20,11 +20,22 @@ class _RootState extends State<Root> {
     ];
     return Scaffold(
       appBar: AppBar(
-        title: Text("EatFit"),
+        title: Text(
+          "EatFit",
+          style: TextStyle(
+            color: Theme.of(context).accentColor,
+            fontSize: 25,
+            fontWeight: FontWeight.bold,
+            letterSpacing: 1.5,
+          ),
+        ),
         centerTitle: true,
+        elevation: 0,
+        backgroundColor: Theme.of(context).primaryColor,
       ),
       body: this.widget.child,
       floatingActionButton: FloatingActionButton(
+        focusColor: Color(0xFF7C7C7C),
         onPressed: () => showModalBottomSheet(
             context: context,
             builder: (BuildContext context) {
@@ -48,11 +59,18 @@ class _RootState extends State<Root> {
         child: Icon(
           Icons.add,
           color: Colors.black,
+          size: 30,
         ),
-        elevation: 2.0,
+        elevation: 3,
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: FABBottomAppBar(
+        notchedShape: CircularNotchedRectangle(),
+        color: Theme.of(context).accentColor,
+        selectedColor: Theme.of(context).accentColor,
+        backgroundColor: Theme.of(context).primaryColor,
+        centerItemText: "Snap!",
+        iconSize: 30,
         onTabSelected: _selectedTab,
         items: [
           FABBottomAppBarItem(iconData: Icons.home, text: 'Home'),

@@ -54,7 +54,14 @@ class _SnapState extends State<Snap> {
             children: <Widget>[
               Center(
                 child: _image == null
-                    ? Text('No image selected.')
+                    ? Text(
+                        'No image selected!\nPlease snap your food again!',
+                        style: TextStyle(
+                          color: Theme.of(context).errorColor,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        textAlign: TextAlign.center,
+                      )
                     : Image.file(_image),
               ),
               Padding(

@@ -128,7 +128,7 @@ class _AuthState extends State<Auth> {
             ),
             prefixIcon: Padding(
               child: IconTheme(
-                data: IconThemeData(color: Theme.of(context).primaryColor),
+                data: IconThemeData(color: Theme.of(context).accentColor),
                 child: icon,
               ),
               padding: EdgeInsets.only(left: 30, right: 10),

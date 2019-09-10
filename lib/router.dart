@@ -72,37 +72,37 @@ class FluroRouter {
     router.define(
       'home',
       handler: _homeHandler,
-      transitionType: TransitionType.material,
+      transitionType: TransitionType.cupertino,
     );
     router.define(
       'exercise',
       handler: _exerciseHandler,
-      transitionType: TransitionType.material,
+      transitionType: TransitionType.cupertino,
     );
     router.define(
       'snap/:value',
       handler: _snapHandler,
-      transitionType: TransitionType.material,
+      transitionType: TransitionType.cupertino,
     );
     router.define(
       'food',
       handler: _foodHandler,
-      transitionType: TransitionType.material,
+      transitionType: TransitionType.cupertino,
     );
     router.define(
       'chat',
       handler: _chatHandler,
-      transitionType: TransitionType.material,
+      transitionType: TransitionType.cupertino,
     );
     router.define(
       'exercise/do',
       handler: _doExerciseHandler,
-      transitionType: TransitionType.material,
+      transitionType: TransitionType.cupertino,
     );
     router.define(
       'settings',
       handler: _settingsHandler,
-      transitionType: TransitionType.material,
+      transitionType: TransitionType.cupertino,
     );
   }
 }
