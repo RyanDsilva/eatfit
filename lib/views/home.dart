@@ -1,5 +1,4 @@
 import 'package:circle_wave_progress/circle_wave_progress.dart';
-import 'package:eatfit/components/customCard.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
