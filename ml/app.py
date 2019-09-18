@@ -10,7 +10,6 @@ from fastai.vision import *
 app = Starlette(debug=True)
 
 # Config
-templates = Jinja2Templates(directory='templates')
 app.add_middleware(CORSMiddleware, allow_origins=[
                    '*'], allow_headers=['X-Requested-With', 'Content-Type'])
 model_food_not_food_pkl = "foodnotfoodv1.pkl"
@@ -20,11 +19,6 @@ path = Path(__file__).parent
 # Deep Learning Models
 model_check_if_food = load_learner(path, model_food_not_food_pkl)
 model_classify_food = load_learner(path, model_classify_food_pkl)
-
-
-@app.route('/')
-async def homepage(request):
-    return templates.TemplateResponse('index.html', {'request': request})
 
 
 @app.route('/check_food', methods=['POST'])
