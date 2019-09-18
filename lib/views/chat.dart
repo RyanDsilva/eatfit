@@ -26,14 +26,15 @@ class _Chat extends State<Chat> {
                 controller: _textController,
                 onSubmitted: _handleSubmitted,
                 decoration:
-                    new InputDecoration.collapsed(hintText: "Send a message"),
+                    new InputDecoration.collapsed(hintText: "Send Message"),
               ),
             ),
             new Container(
               margin: new EdgeInsets.symmetric(horizontal: 4.0),
               child: new IconButton(
-                  icon: new Icon(Icons.send),
-                  onPressed: () => _handleSubmitted(_textController.text)),
+                icon: new Icon(Icons.send),
+                onPressed: () => _handleSubmitted(_textController.text),
+              ),
             ),
           ],
         ),
@@ -51,7 +52,7 @@ class _Chat extends State<Chat> {
     ChatMessage message = new ChatMessage(
       text: response.getMessage() ??
           new CardDialogflow(response.getListMessage()[0]).title,
-      name: "Bot",
+      name: "Mr. X",
       type: false,
     );
     setState(() {
@@ -63,7 +64,7 @@ class _Chat extends State<Chat> {
     _textController.clear();
     ChatMessage message = new ChatMessage(
       text: text,
-      name: "Promise",
+      name: "Ryan Dsilva",
       type: true,
     );
     setState(() {
@@ -76,12 +77,13 @@ class _Chat extends State<Chat> {
   Widget build(BuildContext context) {
     return new Column(children: <Widget>[
       new Flexible(
-          child: new ListView.builder(
-        padding: new EdgeInsets.all(8.0),
-        reverse: true,
-        itemBuilder: (_, int index) => _messages[index],
-        itemCount: _messages.length,
-      )),
+        child: new ListView.builder(
+          padding: new EdgeInsets.all(8.0),
+          reverse: true,
+          itemBuilder: (_, int index) => _messages[index],
+          itemCount: _messages.length,
+        ),
+      ),
       new Divider(height: 1.0),
       new Container(
         decoration: new BoxDecoration(color: Theme.of(context).cardColor),

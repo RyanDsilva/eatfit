@@ -1,0 +1,48 @@
+from starlette.applications import Starlette
+from starlette.templating import Jinja2Templates
+from starlette.responses import JSONResponse
+from starlette.middleware.cors import CORSMiddleware
+import uvicorn
+from io import BytesIO
+from fastai import *
+from fastai.vision import *
+
+app = Starlette(debug=True)
+
+# Config
+templates = Jinja2Templates(directory='templates')
+app.add_middleware(CORSMiddleware, allow_origins=[
+                   '*'], allow_headers=['X-Requested-With', 'Content-Type'])
+model_food_not_food_pkl = "foodnotfoodv1.pkl"
+model_classify_food_pkl = "foodv1.pkl"
+path = Path(__file__).parent
+
+# Deep Learning Models
+model_check_if_food = load_learner(path, model_food_not_food_pkl)
+model_classify_food = load_learner(path, model_classify_food_pkl)
+
+
+@app.route('/')
+async def homepage(request):
+    return templates.TemplateResponse('index.html', {'request': request})
+
+
+@app.route('/check_food', methods=['POST'])
+async def analyze(request):
+    data = await request.form()
+    img_bytes = await (data['file'].read())
+    img = open_image(BytesIO(img_bytes))
+    prediction = model_check_if_food.predict(img)[0]
+    return JSONResponse({'result': str(prediction)})
+
+
+@app.route('/classify_food', methods=['POST'])
+async def classify(request):
+    data = await request.form()
+    img_bytes = await (data['file'].read())
+    img = open_image(BytesIO(img_bytes))
+    prediction = model_classify_food.predict(img)[0]
+    return JSONResponse({'result': str(prediction)})
+
+if __name__ == '__main__':
+    uvicorn.run(app, port=5032)
