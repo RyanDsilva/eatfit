@@ -16,6 +16,7 @@ dependencies:
   cloud_firestore: ^0.12.9+3
   image_picker: ^0.6.1+4
   circle_wave_progress: ^0.0.4
+  flutter_dialogflow: ^0.1.2
 
 dev_dependencies:
   flutter_test:
@@ -31,6 +32,7 @@ flutter:
   uses-material-design: true
   # To add assets to your application, add an assets section, like this:
   assets:
+    - assets/credentials.json
     - assets/gifs/SDM_9.gif
     - assets/gifs/SDM_12.gif
     - assets/gifs/SDM_23.gif

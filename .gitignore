@@ -74,3 +74,4 @@
 android/app/google-services.json
 .vscode
 keys.md
+assets/credentials.json

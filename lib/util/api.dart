@@ -14,8 +14,7 @@ class API {
   const API();
 
   Future<String> predictFood(File image) async {
-    FormData data = new FormData();
-    data.add("photo", new UploadFileInfo(image, image.path));
+    MultipartFile data = new MultipartFile.fromString(image.readAsStringSync());
     Response res = await service.post(
       "/predict",
       data: data,
