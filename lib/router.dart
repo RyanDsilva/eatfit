@@ -3,6 +3,7 @@ import 'package:eatfit/views/chat.dart';
 import 'package:eatfit/views/exercise/doExercise.dart';
 import 'package:eatfit/views/exercise/exerciseHome.dart';
 import 'package:eatfit/views/food.dart';
+import 'package:eatfit/views/home.dart';
 import 'package:eatfit/views/landing.dart';
 import 'package:eatfit/views/settings.dart';
 import 'package:eatfit/views/snap.dart';
@@ -15,6 +16,12 @@ class FluroRouter {
   static Handler _homeHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, dynamic> params) {
       return Landing();
+    },
+  );
+
+  static Handler _homePageHandler = Handler(
+    handlerFunc: (BuildContext context, Map<String, dynamic> params) {
+      return Home();
     },
   );
 
@@ -72,6 +79,11 @@ class FluroRouter {
     router.define(
       'home',
       handler: _homeHandler,
+      transitionType: TransitionType.cupertino,
+    );
+    router.define(
+      'homepage',
+      handler: _homePageHandler,
       transitionType: TransitionType.cupertino,
     );
     router.define(

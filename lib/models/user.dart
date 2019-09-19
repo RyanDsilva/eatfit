@@ -29,7 +29,7 @@ class User with ChangeNotifier {
       name: data['name'] ?? '',
       email: data['email'] ?? '',
       currentCalories: data['currentCalories'] ?? 0,
-      meals: data['meals'].map((meal) => Meal.fromFirestore(meal)) ?? [],
+      meals: Meal.fromData(data['meals']) ?? [],
       lifestyleChoice: data['lifestyleChoice'] ?? Calorie.MALE_MAINTAIN,
       gender: data['gender'] ?? "Male",
     );

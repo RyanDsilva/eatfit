@@ -1,10 +1,10 @@
 import 'package:circle_wave_progress/circle_wave_progress.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:eatfit/models/user.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
-  final FirebaseUser user;
+  final User user;
 
   const Home({Key key, this.user}) : super(key: key);
 
@@ -38,7 +38,7 @@ class _HomeState extends State<Home> {
                   Padding(
                     padding: const EdgeInsets.fromLTRB(0, 0, 10, 20),
                     child: Text(
-                      "Ryan",
+                      this.widget.user.name,
                       style: TextStyle(
                         color: Theme.of(context).accentColor,
                         fontWeight: FontWeight.bold,
@@ -61,7 +61,10 @@ class _HomeState extends State<Home> {
             Padding(
               padding: const EdgeInsets.all(5.0),
               child: Text(
-                "Today's Calorie Intake\n1200 / 2000",
+                "Today's Calorie Intake\n" +
+                    this.widget.user.currentCalories.toString() +
+                    " / " +
+                    this.widget.user.lifestyleChoice.toString(),
                 style: TextStyle(
                   letterSpacing: 0.5,
                   //fontWeight: FontWeight.w100,

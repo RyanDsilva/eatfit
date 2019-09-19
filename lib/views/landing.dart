@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:eatfit/components/root.dart';
+import 'package:eatfit/models/user.dart';
 import 'package:eatfit/views/auth.dart';
 import 'package:eatfit/views/home.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -11,10 +13,20 @@ class Landing extends StatefulWidget {
 }
 
 class _LandingState extends State<Landing> {
-  FirebaseUser user;
+  User user;
+  final Firestore db = Firestore.instance;
 
-  Future<FirebaseUser> _getCurrentUser() async {
+  Future<FirebaseUser> _getCurrentUserFromAuth() async {
     return await FirebaseAuth.instance.currentUser();
+  }
+
+  Future<User> _getCurrentUser() async {
+    FirebaseUser _fbUser = await _getCurrentUserFromAuth();
+    if (_fbUser != null) {
+      return User.fromFirestore(
+          await db.collection('users').document(_fbUser.uid).get());
+    }
+    return null;
   }
 
   Widget _renderScreen() {

@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:eatfit/models/user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:eatfit/util/bottomWaveClipper.dart';
@@ -23,6 +24,23 @@ class _AuthState extends State<Auth> {
   @override
   void initState() {
     super.initState();
+  }
+
+  void showInSnackBar(String value) {
+    FocusScope.of(context).requestFocus(new FocusNode());
+    _scaffoldKey.currentState?.removeCurrentSnackBar();
+    _scaffoldKey.currentState.showSnackBar(new SnackBar(
+      content: new Text(
+        value,
+        textAlign: TextAlign.center,
+        style: TextStyle(
+          color: Colors.white,
+          fontSize: 16.0,
+        ),
+      ),
+      backgroundColor: Colors.blue,
+      duration: Duration(seconds: 3),
+    ));
   }
 
   @override
@@ -165,11 +183,7 @@ class _AuthState extends State<Auth> {
     }
 
     void _loginUser() async {
-      _scaffoldKey.currentState.showSnackBar(
-        new SnackBar(
-          content: Text("Logging you in ..."),
-        ),
-      );
+      showInSnackBar('Logging You In ...');
       _email = _emailController.text;
       _password = _passwordController.text;
       _emailController.clear();
@@ -181,27 +195,25 @@ class _AuthState extends State<Auth> {
     }
 
     void _registerUser() async {
-      _scaffoldKey.currentState.showSnackBar(
-        new SnackBar(
-          content: Text("Signing you up ..."),
-        ),
-      );
+      showInSnackBar('Signing You Up ...');
       _email = _emailController.text;
       _password = _passwordController.text;
       _displayName = _nameController.text;
       _emailController.clear();
       _passwordController.clear();
       _nameController.clear();
-      final FirebaseUser user =
+      final FirebaseUser _user =
           (await firebaseAuth.createUserWithEmailAndPassword(
                   email: _email, password: _password))
               .user;
-      DocumentReference ref = db.collection("users").document(user.uid);
+      DocumentReference ref = db.collection("users").document(_user.uid);
       ref.setData({
-        'id': user.uid,
-        'email': user.email,
+        'id': _user.uid,
+        'email': _user.email,
         'name': _displayName,
       }, merge: true);
+      User user = User.fromFirestore(
+          await db.collection('users').document(_user.uid).get());
       Navigator.pushReplacementNamed(context, "home", arguments: user);
     }
 

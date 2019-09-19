@@ -7,12 +7,28 @@ class Meal {
 
   Meal({this.name, this.calories, this.time});
 
+  static List<Meal> fromData(List meals) {
+    List<Meal> finalMeals = [];
+    for (var data in meals) {
+      Meal m = Meal(
+        name: data['name'] ?? '',
+        calories: data['calories'] ?? 0,
+        time:
+            DateTime.fromMillisecondsSinceEpoch(data['time'].seconds * 1000) ??
+                '',
+      );
+      finalMeals.add(m);
+    }
+    return finalMeals;
+  }
+
   factory Meal.fromFirestore(DocumentSnapshot doc) {
     Map data = doc.data ?? {};
     return Meal(
       name: data['name'] ?? '',
       calories: data['calories'] ?? 0,
-      time: data['time'] ?? '',
+      time: DateTime.fromMillisecondsSinceEpoch(data['time'].seconds * 1000) ??
+          '',
     );
   }
 
