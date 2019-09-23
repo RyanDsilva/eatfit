@@ -1,51 +1,58 @@
+import 'package:eatfit/models/exercise.dart';
+import 'package:eatfit/util/exerciseList.dart';
 import 'package:flutter/material.dart';
 
-class Exercise extends StatelessWidget {
-  const Exercise({Key key}) : super(key: key);
+class ExerciseHome extends StatelessWidget {
+  const ExerciseHome({Key key}) : super(key: key);
 
-  Widget cards(image, title, reps, audio) {
-    return Container(
-      height: 200,
-      width: 200,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(30),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey,
-            blurRadius: 6.0,
-          ),
-        ],
-        color: Colors.grey.shade100,
-      ),
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Image.asset(
-              image,
-              height: 80,
-            ),
-            SizedBox(
-              height: 5,
-            ),
-            Text(
-              title,
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-            ),
-            Container(
-              padding: EdgeInsets.all(5),
-              margin: EdgeInsets.only(top: 4),
-              color: Color(0xFF92DCE5),
-              child: Text(
-                "x " + reps,
-                style: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 12,
-                ),
-              ),
+  Widget cards(context, Exercise exercise) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.pushNamed(context, 'exercise/' + exercise.getID());
+      },
+      child: Container(
+        height: 200,
+        width: 200,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(30),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey,
+              blurRadius: 6.0,
             ),
           ],
+          color: Colors.grey.shade100,
+        ),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Image.asset(
+                exercise.getImage(),
+                height: 80,
+              ),
+              SizedBox(
+                height: 5,
+              ),
+              Text(
+                exercise.getName(),
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+              ),
+              Container(
+                padding: EdgeInsets.all(5),
+                margin: EdgeInsets.only(top: 4),
+                color: Color(0xFF92DCE5),
+                child: Text(
+                  "x " + exercise.getReps(),
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 12,
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -53,6 +60,7 @@ class Exercise extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<Exercise> exercises = exerciseList;
     return SafeArea(
       child: Stack(
         children: <Widget>[
@@ -121,12 +129,30 @@ class Exercise extends StatelessWidget {
                   mainAxisSpacing: 10,
                   crossAxisSpacing: 10,
                   children: <Widget>[
-                    cards('assets/gifs/SDM_9.gif', 'Leg Stretch', '30', ''),
-                    cards('assets/gifs/SDM_12.gif', 'Side-to-Side', '25', ''),
-                    cards('assets/gifs/SDM_18.gif', 'Vert. Crunch', '20', ''),
-                    cards('assets/gifs/SDM_23.gif', 'Spot Jog', '50', ''),
-                    cards('assets/gifs/SDM_58.gif', 'Elbow-Knee', '25', ''),
-                    cards('assets/gifs/SDM_65.gif', 'Back Push', '20', ''),
+                    cards(
+                      context,
+                      exercises[0],
+                    ),
+                    cards(
+                      context,
+                      exercises[1],
+                    ),
+                    cards(
+                      context,
+                      exercises[2],
+                    ),
+                    cards(
+                      context,
+                      exercises[3],
+                    ),
+                    cards(
+                      context,
+                      exercises[4],
+                    ),
+                    cards(
+                      context,
+                      exercises[5],
+                    ),
                   ],
                 ),
               ),

@@ -35,13 +35,13 @@ class User with ChangeNotifier {
     );
   }
 
-  getName() => this.name;
-  getID() => this.id;
-  getEmail() => this.email;
-  getMeals() => this.meals;
-  getCurrentCalories() => this.currentCalories;
-  getLifestyleChoice() => this.lifestyleChoice;
-  getGender() => this.gender;
+  String getName() => this.name;
+  String getID() => this.id;
+  String getEmail() => this.email;
+  List<Meal> getMeals() => this.meals;
+  int getCurrentCalories() => this.currentCalories;
+  int getLifestyleChoice() => this.lifestyleChoice;
+  String getGender() => this.gender;
 
   setName(String name) => this.name = name;
   setLifestyleChoice(int value) => this.lifestyleChoice = value;

@@ -39,7 +39,7 @@ class FluroRouter {
   static Handler _exerciseHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, dynamic> params) {
       return Root(
-        child: Exercise(),
+        child: ExerciseHome(),
       );
     },
   );
@@ -73,7 +73,9 @@ class FluroRouter {
   static Handler _doExerciseHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, dynamic> params) {
       return Root(
-        child: DoExercise(),
+        child: DoExercise(
+          id: params["id"][0],
+        ),
       );
     },
   );
@@ -123,7 +125,7 @@ class FluroRouter {
       transitionType: TransitionType.cupertino,
     );
     router.define(
-      'exercise/do',
+      'exercise/:id',
       handler: _doExerciseHandler,
       transitionType: TransitionType.cupertino,
     );

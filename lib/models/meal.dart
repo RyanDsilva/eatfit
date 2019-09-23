@@ -32,9 +32,9 @@ class Meal {
     );
   }
 
-  getMeal() => this.name;
-  getCalorieValue() => this.calories;
-  getTimeOfConsumption() => this.time;
+  String getMeal() => this.name;
+  int getCalorieValue() => this.calories;
+  DateTime getTimeOfConsumption() => this.time;
 
   setMeal(String name) => this.name = name;
   setCalorieValue(int calories) => this.calories = calories;
