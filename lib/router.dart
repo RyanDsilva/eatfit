@@ -1,4 +1,5 @@
 import 'package:eatfit/components/root.dart';
+import 'package:eatfit/views/auth.dart';
 import 'package:eatfit/views/chat.dart';
 import 'package:eatfit/views/exercise/doExercise.dart';
 import 'package:eatfit/views/exercise/exerciseHome.dart';
@@ -13,15 +14,25 @@ import 'package:fluro/fluro.dart';
 class FluroRouter {
   static Router router = Router();
 
-  static Handler _homeHandler = Handler(
+  static Handler _rootHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, dynamic> params) {
       return Landing();
     },
   );
 
-  static Handler _homePageHandler = Handler(
+  static Handler _authHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, dynamic> params) {
-      return Home();
+      return Auth();
+    },
+  );
+
+  static Handler _homeHandler = Handler(
+    handlerFunc: (BuildContext context, Map<String, dynamic> params) {
+      return Root(
+        child: Home(
+          id: params["id"][0],
+        ),
+      );
     },
   );
 
@@ -78,12 +89,17 @@ class FluroRouter {
   static void setupRouter() {
     router.define(
       'home',
-      handler: _homeHandler,
+      handler: _rootHandler,
       transitionType: TransitionType.cupertino,
     );
     router.define(
-      'homepage',
-      handler: _homePageHandler,
+      'auth',
+      handler: _authHandler,
+      transitionType: TransitionType.cupertino,
+    );
+    router.define(
+      'dashboard/:id',
+      handler: _homeHandler,
       transitionType: TransitionType.cupertino,
     );
     router.define(

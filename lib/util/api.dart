@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'dart:io';
+import 'dart:async';
 
 class API {
   static final String url = '';
@@ -24,9 +25,5 @@ class API {
     );
     String prediction = res.data.toString();
     return prediction;
-  }
-
-  int getCalories() {
-    return 0;
   }
 }

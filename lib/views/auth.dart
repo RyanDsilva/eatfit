@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:eatfit/models/user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:eatfit/util/bottomWaveClipper.dart';
@@ -191,7 +190,7 @@ class _AuthState extends State<Auth> {
       final FirebaseUser user = (await firebaseAuth.signInWithEmailAndPassword(
               email: _email, password: _password))
           .user;
-      Navigator.pushReplacementNamed(context, "home", arguments: user);
+      Navigator.pushReplacementNamed(context, "dashboard/${user.uid}");
     }
 
     void _registerUser() async {
@@ -211,10 +210,10 @@ class _AuthState extends State<Auth> {
         'id': _user.uid,
         'email': _user.email,
         'name': _displayName,
+        'gender': 'Male',
+        
       }, merge: true);
-      User user = User.fromFirestore(
-          await db.collection('users').document(_user.uid).get());
-      Navigator.pushReplacementNamed(context, "home", arguments: user);
+      Navigator.pushReplacementNamed(context, "dashboard/${_user.uid}");
     }
 
     void _loginSheet() {
