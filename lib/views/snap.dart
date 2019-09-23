@@ -1,5 +1,9 @@
 import 'dart:async';
 import 'dart:io';
+import 'package:eatfit/components/customLoader.dart';
+import 'package:eatfit/util/api.dart';
+import 'package:eatfit/util/db.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:eatfit/components/customCard.dart';
@@ -15,11 +19,44 @@ class Snap extends StatefulWidget {
 
 class _SnapState extends State<Snap> {
   File _image;
+  API server = API();
+  DatabaseService db = DatabaseService();
+  bool isLoading = true;
+  String prediction = '';
+  FirebaseUser fbuser;
+  TextEditingController _calorieController = new TextEditingController();
+  String calories;
 
   @override
   initState() {
     super.initState();
+    FirebaseAuth.instance.currentUser().then((user) {
+      setState(() {
+        this.fbuser = user;
+      });
+    });
     getImage(this.widget.value);
+  }
+
+  void predict() async {
+    String res = await server.predictFood(this._image);
+    setState(() {
+      this.prediction = res;
+      this.isLoading = false;
+    });
+  }
+
+  void updateMeal() {
+    calories = _calorieController.text;
+    _calorieController.clear();
+    Map m = {
+      "name": this.prediction,
+      "calories": int.parse(calories),
+      "time": DateTime.now()
+    };
+    List l = [m];
+    db.addMeal(l, this.fbuser.uid);
+    Navigator.popAndPushNamed(context, 'food');
   }
 
   Future getImage(int value) async {
@@ -41,11 +78,50 @@ class _SnapState extends State<Snap> {
     }
   }
 
+  Widget _input(
+      Icon icon, String hint, TextEditingController controller, bool obsecure) {
+    return Container(
+      padding: EdgeInsets.only(left: 20, right: 20),
+      child: TextField(
+        controller: controller,
+        obscureText: obsecure,
+        style: TextStyle(
+          fontSize: 20,
+        ),
+        decoration: InputDecoration(
+          hintStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+          hintText: hint,
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(30),
+            borderSide: BorderSide(
+              color: Theme.of(context).primaryColor,
+              width: 2,
+            ),
+          ),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(30),
+            borderSide: BorderSide(
+              color: Theme.of(context).primaryColor,
+              width: 3,
+            ),
+          ),
+          prefixIcon: Padding(
+            child: IconTheme(
+              data: IconThemeData(color: Theme.of(context).accentColor),
+              child: icon,
+            ),
+            padding: EdgeInsets.only(left: 30, right: 10),
+          ),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: new CustomCard(
-        bgColor: Colors.black12,
+        bgColor: Colors.grey.shade100,
         content: new Container(
           margin: EdgeInsets.all(10),
           padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
@@ -65,14 +141,10 @@ class _SnapState extends State<Snap> {
                     : Image.file(_image),
               ),
               Padding(
-                child: Text("food_name"),
-                padding: EdgeInsets.all(10),
-              ),
-              Padding(
                 child: RaisedButton(
-                  onPressed: () => print("Clicked!"),
+                  onPressed: () => this.predict(),
                   child: Text(
-                    "Add",
+                    "Predict",
                     style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
@@ -81,7 +153,34 @@ class _SnapState extends State<Snap> {
                   color: Theme.of(context).primaryColor,
                 ),
                 padding: EdgeInsets.all(5),
-              )
+              ),
+              Padding(
+                child: this.isLoading
+                    ? CustomLoader()
+                    : Text(
+                        this.prediction,
+                        style: TextStyle(
+                          fontSize: 20,
+                        ),
+                      ),
+                padding: EdgeInsets.all(10),
+              ),
+              _input(Icon(Icons.fastfood), "Calories", this._calorieController,
+                  false),
+              Padding(
+                child: RaisedButton(
+                  onPressed: () => this.updateMeal(),
+                  child: Text(
+                    "Add To Log",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  color: Theme.of(context).primaryColor,
+                ),
+                padding: EdgeInsets.all(5),
+              ),
             ],
           ),
         ),

@@ -12,6 +12,13 @@ class DatabaseService {
         .then((doc) => User.fromFirestore(doc));
   }
 
+  Future<void> addMeal(List data, String id) {
+    return firestoreDB
+        .collection('users')
+        .document(id)
+        .updateData({"meals": FieldValue.arrayUnion(data)});
+  }
+
   Future<void> updateUser(Map data, String id) {
     return firestoreDB.collection('users').document(id).updateData(data);
   }

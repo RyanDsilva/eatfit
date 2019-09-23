@@ -21,6 +21,11 @@ model_check_if_food = load_learner(path, model_food_not_food_pkl)
 model_classify_food = load_learner(path, model_classify_food_pkl)
 
 
+@app.route('/', methods=['GET'])
+async def home(request):
+    return JSONResponse('Server Reached')
+
+
 @app.route('/check_food', methods=['POST'])
 async def analyze(request):
     data = await request.form()

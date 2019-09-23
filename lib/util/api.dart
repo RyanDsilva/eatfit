@@ -3,7 +3,7 @@ import 'dart:io';
 import 'dart:async';
 
 class API {
-  static final String url = '';
+  static final String url = 'http://f13cbca3.ngrok.io';
   static BaseOptions opts = BaseOptions(
     baseUrl: url,
     responseType: ResponseType.json,
@@ -15,15 +15,16 @@ class API {
   const API();
 
   Future<String> predictFood(File image) async {
-    MultipartFile data = new MultipartFile.fromString(image.readAsStringSync());
+    FormData data =
+        FormData.fromMap({"file": await MultipartFile.fromFile(image.path)});
     Response res = await service.post(
-      "/predict",
+      "/classify_food",
       data: data,
       options: Options(
         method: 'POST',
       ),
     );
-    String prediction = res.data.toString();
+    String prediction = res.data['result'].toString();
     return prediction;
   }
 }
