@@ -12,6 +12,18 @@ class Root extends StatefulWidget {
 }
 
 class _RootState extends State<Root> {
+  FirebaseUser fbUser;
+
+  @override
+  void initState() {
+    super.initState();
+    FirebaseAuth.instance.currentUser().then((user) {
+      setState(() {
+        this.fbUser = user;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     var _items = [
@@ -86,7 +98,7 @@ class _RootState extends State<Root> {
     print("Tab: $index");
     switch (index) {
       case 0:
-        Navigator.pushReplacementNamed(context, 'homepage');
+        Navigator.pushReplacementNamed(context, 'dashboard/${this.fbUser.uid}');
         break;
       case 1:
         Navigator.pushNamed(context, 'food');

@@ -31,6 +31,12 @@ class _FoodState extends State<Food> {
     });
   }
 
+  final recMeals = [
+    'Eggs and Brown Bread',
+    'Salad & Vegetable Stir Fry',
+    'Soup and Fruits',
+  ];
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -135,7 +141,7 @@ class _FoodState extends State<Food> {
                         itemBuilder: (context, index) {
                           return ListTile(
                             title: Text(
-                              "Food $index",
+                              this.recMeals[index],
                               style: TextStyle(
                                 fontSize: 16,
                                 color: Theme.of(context).accentColor,

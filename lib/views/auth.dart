@@ -211,7 +211,6 @@ class _AuthState extends State<Auth> {
         'email': _user.email,
         'name': _displayName,
         'gender': 'Male',
-        
       }, merge: true);
       Navigator.pushReplacementNamed(context, "dashboard/${_user.uid}");
     }

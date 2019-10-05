@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:eatfit/components/customLoader.dart';
+import 'package:eatfit/models/user.dart';
 import 'package:eatfit/util/api.dart';
 import 'package:eatfit/util/db.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -23,7 +24,7 @@ class _SnapState extends State<Snap> {
   DatabaseService db = DatabaseService();
   bool isLoading = true;
   String prediction = '';
-  FirebaseUser fbuser;
+  User user;
   TextEditingController _calorieController = new TextEditingController();
   String calories;
 
@@ -31,8 +32,10 @@ class _SnapState extends State<Snap> {
   initState() {
     super.initState();
     FirebaseAuth.instance.currentUser().then((user) {
-      setState(() {
-        this.fbuser = user;
+      db.getUser(user.uid).then((currUser) {
+        setState(() {
+          this.user = currUser;
+        });
       });
     });
     getImage(this.widget.value);
@@ -55,7 +58,9 @@ class _SnapState extends State<Snap> {
       "time": DateTime.now()
     };
     List l = [m];
-    db.addMeal(l, this.fbuser.uid);
+    db.addMeal(l, this.user.id);
+    int newCal = this.user.currentCalories + int.parse(calories);
+    db.updateUser({"currentCalories": newCal}, this.user.id);
     Navigator.popAndPushNamed(context, 'food');
   }
 

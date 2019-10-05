@@ -7,7 +7,7 @@ from io import BytesIO
 from fastai import *
 from fastai.vision import *
 
-app = Starlette(debug=True)
+app = Starlette()
 
 # Config
 app.add_middleware(CORSMiddleware, allow_origins=[
@@ -42,6 +42,7 @@ async def classify(request):
     img = open_image(BytesIO(img_bytes))
     prediction = model_classify_food.predict(img)[0]
     return JSONResponse({'result': str(prediction)})
+
 
 if __name__ == '__main__':
     uvicorn.run(app, port=5032)

@@ -1,3 +1,7 @@
+import 'package:eatfit/components/customLoader.dart';
+import 'package:eatfit/models/user.dart';
+import 'package:eatfit/util/db.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dialogflow/dialogflow_v2.dart';
 
@@ -13,6 +17,21 @@ class Chat extends StatefulWidget {
 class _Chat extends State<Chat> {
   final List<ChatMessage> _messages = <ChatMessage>[];
   final TextEditingController _textController = new TextEditingController();
+  User user;
+  bool isLoading = true;
+  DatabaseService db = DatabaseService();
+  @override
+  void initState() {
+    super.initState();
+    FirebaseAuth.instance.currentUser().then((user) {
+      db.getUser(user.uid).then((newUser) {
+        setState(() {
+          this.user = newUser;
+          this.isLoading = false;
+        });
+      });
+    });
+  }
 
   Widget _buildTextComposer() {
     return new IconTheme(
@@ -64,7 +83,7 @@ class _Chat extends State<Chat> {
     _textController.clear();
     ChatMessage message = new ChatMessage(
       text: text,
-      name: "Ryan Dsilva",
+      name: this.user.name,
       type: true,
     );
     setState(() {
@@ -75,21 +94,26 @@ class _Chat extends State<Chat> {
 
   @override
   Widget build(BuildContext context) {
-    return new Column(children: <Widget>[
-      new Flexible(
-        child: new ListView.builder(
-          padding: new EdgeInsets.all(8.0),
-          reverse: true,
-          itemBuilder: (_, int index) => _messages[index],
-          itemCount: _messages.length,
+    return new Column(
+      children: <Widget>[
+        new Flexible(
+          child: new ListView.builder(
+            padding: new EdgeInsets.all(8.0),
+            reverse: true,
+            itemBuilder: (_, int index) => _messages[index],
+            itemCount: _messages.length,
+          ),
         ),
-      ),
-      new Divider(height: 1.0),
-      new Container(
-        decoration: new BoxDecoration(color: Theme.of(context).cardColor),
-        child: _buildTextComposer(),
-      ),
-    ]);
+        new Divider(height: 1.0),
+        !this.isLoading
+            ? CustomLoader()
+            : Container(
+                decoration:
+                    new BoxDecoration(color: Theme.of(context).cardColor),
+                child: _buildTextComposer(),
+              ),
+      ],
+    );
   }
 }
 

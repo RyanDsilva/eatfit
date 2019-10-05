@@ -34,6 +34,10 @@ class _HomeState extends State<Home> {
     });
   }
 
+  double getPercentage() {
+    return (this.user.currentCalories / this.user.lifestyleChoice) * 100;
+  }
+
   @override
   Widget build(BuildContext context) {
     return !this._isLoading
@@ -103,7 +107,7 @@ class _HomeState extends State<Home> {
                       borderColor: Theme.of(context).primaryColor,
                       borderWidth: 7.0,
                       waveColor: Theme.of(context).accentColor,
-                      progress: 65.0,
+                      progress: getPercentage(),
                       size: 275.0,
                     ),
                   ),
