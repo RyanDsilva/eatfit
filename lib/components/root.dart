@@ -88,7 +88,7 @@ class _RootState extends State<Root> {
           FABBottomAppBarItem(iconData: Icons.home, text: 'Home'),
           FABBottomAppBarItem(iconData: Icons.local_dining, text: 'Food'),
           FABBottomAppBarItem(iconData: Icons.fitness_center, text: 'Exercise'),
-          FABBottomAppBarItem(iconData: Icons.settings, text: 'Settings'),
+          FABBottomAppBarItem(iconData: Icons.exit_to_app, text: 'Logout'),
         ],
       ),
     );

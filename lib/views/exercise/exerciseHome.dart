@@ -156,6 +156,21 @@ class ExerciseHome extends StatelessWidget {
                   ],
                 ),
               ),
+              SliverToBoxAdapter(
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(30, 20, 30, 30),
+                  child: RaisedButton(
+                    onPressed: () => Navigator.of(context).pushNamed('maps'),
+                    color: Theme.of(context).primaryColor,
+                    child: Text(
+                      'Go For A Run',
+                      style: TextStyle(
+                        color: Theme.of(context).accentColor,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
             ],
           ),
         ],

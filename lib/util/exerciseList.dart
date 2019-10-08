@@ -31,7 +31,7 @@ final List<Exercise> exerciseList = [
   ),
   Exercise(
     '4',
-    'Bicycle Crunches',
+    'Cycle Crunch',
     '25',
     'audio/SDM_58.mp3',
     'assets/gifs/SDM_58.gif',
