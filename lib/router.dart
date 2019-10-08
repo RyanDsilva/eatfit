@@ -6,7 +6,7 @@ import 'package:eatfit/views/exercise/exerciseHome.dart';
 import 'package:eatfit/views/food.dart';
 import 'package:eatfit/views/home.dart';
 import 'package:eatfit/views/landing.dart';
-import 'package:eatfit/views/settings.dart';
+import 'package:eatfit/views/maps.dart';
 import 'package:eatfit/views/snap.dart';
 import 'package:flutter/material.dart';
 import 'package:fluro/fluro.dart';
@@ -80,11 +80,9 @@ class FluroRouter {
     },
   );
 
-  static Handler _settingsHandler = Handler(
+  static Handler _mapsHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, dynamic> params) {
-      return Root(
-        child: Settings(),
-      );
+      return Maps();
     },
   );
 
@@ -130,8 +128,8 @@ class FluroRouter {
       transitionType: TransitionType.cupertino,
     );
     router.define(
-      'settings',
-      handler: _settingsHandler,
+      'maps',
+      handler: _mapsHandler,
       transitionType: TransitionType.cupertino,
     );
   }

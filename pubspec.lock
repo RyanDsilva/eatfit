@@ -130,20 +130,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  geolocator:
+  google_maps_flutter:
     dependency: "direct main"
     description:
-      name: geolocator
+      name: google_maps_flutter
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "5.1.3"
-  google_api_availability:
-    dependency: transitive
-    description:
-      name: google_api_availability
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.0.1"
+    version: "0.5.21+7"
   googleapis_auth:
     dependency: transitive
     description:
@@ -186,13 +179,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.16.0"
-  location_permissions:
-    dependency: transitive
+  location:
+    dependency: "direct main"
     description:
-      name: location_permissions
+      name: location
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.2"
+    version: "2.3.5"
   matcher:
     dependency: transitive
     description:
