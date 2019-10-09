@@ -4,7 +4,7 @@
 
 ![](./eatfit-github.gif)
 
-## Getting Started
+## Getting Started ✨
 
 1. Clone the repository
 
@@ -29,8 +29,10 @@ flutter run
 
 > Use `--release` for release build
 
-## Note
+## Note ❗️
 
 Any assets used in this project are meant for demonstration purposes only and I do not own any rights to those assets.
+
+---
 
 ##### Developed as part of the Android Development Lab Project required for Semester VII, Information Technology - University of Mumbai
