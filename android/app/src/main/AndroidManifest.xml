@@ -10,7 +10,7 @@
         android:label="EatFit"
         android:icon="@mipmap/launcher_icon">
         <meta-data android:name="com.google.android.geo.API_KEY"
-               android:value=""/>
+               android:value="AIzaSyBfUq4_M5AnUBtXc8K2WfmO7ViKtoT31yk"/>
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
