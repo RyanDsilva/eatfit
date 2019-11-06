@@ -53,7 +53,7 @@ class _HomeState extends State<Home> {
                         Padding(
                           padding: const EdgeInsets.fromLTRB(10, 0, 6, 20),
                           child: Text(
-                            "Welcome",
+                            "Hello",
                             style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.w100,
@@ -106,47 +106,17 @@ class _HomeState extends State<Home> {
                       backgroundColor: Colors.transparent,
                       borderColor: Theme.of(context).primaryColor,
                       borderWidth: 7.0,
-                      waveColor: Theme.of(context).accentColor,
-                      progress: getPercentage(),
+                      waveColor: getPercentage() <= 100
+                          ? Theme.of(context).accentColor
+                          : Theme.of(context).errorColor,
+                      progress: getPercentage() <= 100 ? getPercentage() : 100,
                       size: 275.0,
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: RaisedButton(
-                      splashColor: Color(0xFF7C7C7C),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Icon(
-                              Icons.chat,
-                              color: Theme.of(context).accentColor,
-                            ),
-                          ),
-                          Text(
-                            "Talk to Mr. X",
-                            style: TextStyle(
-                              color: Theme.of(context).accentColor,
-                              fontSize: 20,
-                            ),
-                          ),
-                        ],
-                      ),
-                      onPressed: () => Navigator.of(context).pushNamed("chat"),
-                      padding: EdgeInsets.all(10),
-                      color: Theme.of(context).primaryColor,
-                      elevation: 3,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
                     ),
                   ),
                   Padding(
                     padding: EdgeInsets.fromLTRB(10, 10, 10, 30),
                     child: Text(
-                      "© Ryan Dsilva 2019-20",
+                      "© Ryan, Niharika & Katoushka 2019-20",
                       style: TextStyle(
                         fontWeight: FontWeight.w100,
                       ),

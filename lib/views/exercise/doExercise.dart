@@ -40,8 +40,13 @@ class _DoExerciseState extends State<DoExercise> {
 
   void seekToSecond(int second) {
     Duration newDuration = Duration(seconds: second);
-
     advancedPlayer.seek(newDuration);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    advancedPlayer.release();
   }
 
   Widget _tab(List<Widget> children) {

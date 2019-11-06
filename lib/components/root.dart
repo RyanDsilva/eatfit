@@ -98,7 +98,8 @@ class _RootState extends State<Root> {
     print("Tab: $index");
     switch (index) {
       case 0:
-        Navigator.pushReplacementNamed(context, 'dashboard/${this.fbUser.uid}');
+        Navigator.pushNamedAndRemoveUntil(context,
+            'dashboard/${this.fbUser.uid}', (Route<dynamic> route) => false);
         break;
       case 1:
         Navigator.pushNamed(context, 'food');

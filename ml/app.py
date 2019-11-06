@@ -12,27 +12,16 @@ app = Starlette()
 # Config
 app.add_middleware(CORSMiddleware, allow_origins=[
                    '*'], allow_headers=['X-Requested-With', 'Content-Type'])
-model_food_not_food_pkl = "foodnotfoodv1.pkl"
 model_classify_food_pkl = "foodv1.pkl"
 path = Path(__file__).parent
 
 # Deep Learning Models
-model_check_if_food = load_learner(path, model_food_not_food_pkl)
 model_classify_food = load_learner(path, model_classify_food_pkl)
 
 
 @app.route('/', methods=['GET'])
 async def home(request):
     return JSONResponse('Server Reached')
-
-
-@app.route('/check_food', methods=['POST'])
-async def analyze(request):
-    data = await request.form()
-    img_bytes = await (data['file'].read())
-    img = open_image(BytesIO(img_bytes))
-    prediction = model_check_if_food.predict(img)[0]
-    return JSONResponse({'result': str(prediction)})
 
 
 @app.route('/classify_food', methods=['POST'])

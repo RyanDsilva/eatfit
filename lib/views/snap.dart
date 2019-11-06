@@ -22,7 +22,7 @@ class _SnapState extends State<Snap> {
   File _image;
   API server = API();
   DatabaseService db = DatabaseService();
-  bool isLoading = true;
+  bool isLoading = false;
   String prediction = '';
   User user;
   TextEditingController _calorieController = new TextEditingController();
@@ -42,6 +42,9 @@ class _SnapState extends State<Snap> {
   }
 
   void predict() async {
+    setState(() {
+      this.isLoading = true;
+    });
     String res = await server.predictFood(this._image);
     setState(() {
       this.prediction = res;
@@ -59,8 +62,6 @@ class _SnapState extends State<Snap> {
     };
     List l = [m];
     db.addMeal(l, this.user.id);
-    int newCal = this.user.currentCalories + int.parse(calories);
-    db.updateUser({"currentCalories": newCal}, this.user.id);
     Navigator.popAndPushNamed(context, 'food');
   }
 
@@ -168,7 +169,7 @@ class _SnapState extends State<Snap> {
                           fontSize: 20,
                         ),
                       ),
-                padding: EdgeInsets.all(10),
+                padding: EdgeInsets.all(5),
               ),
               _input(Icon(Icons.fastfood), "Calories", this._calorieController,
                   false),

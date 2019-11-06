@@ -24,15 +24,20 @@ class User with ChangeNotifier {
 
   factory User.fromFirestore(DocumentSnapshot doc) {
     Map data = doc.data;
-    return User(
+    User u = new User(
       id: doc.documentID,
       name: data['name'] ?? '',
       email: data['email'] ?? '',
-      currentCalories: data['currentCalories'] ?? 0,
       meals: Meal.fromData(data['meals']) ?? [],
       lifestyleChoice: data['lifestyleChoice'] ?? Calorie.MALE_MAINTAIN,
       gender: data['gender'] ?? "Male",
     );
+    int cal = 0;
+    for (var meal in u.getMeals()) {
+      cal += meal.calories;
+    }
+    u.setCalories(cal);
+    return u;
   }
 
   String getName() => this.name;
@@ -50,6 +55,10 @@ class User with ChangeNotifier {
   void addMeal(Meal meal) {
     this.meals.add(meal);
     notifyListeners();
+  }
+
+  void setCalories(int cal) {
+    this.currentCalories = cal;
   }
 
   void updateCalorieCount(int value) {

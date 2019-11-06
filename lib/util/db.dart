@@ -18,8 +18,4 @@ class DatabaseService {
         .document(id)
         .updateData({"meals": FieldValue.arrayUnion(data)});
   }
-
-  Future<void> updateUser(Map data, String id) {
-    return firestoreDB.collection('users').document(id).updateData(data);
-  }
 }
