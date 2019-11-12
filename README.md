@@ -2,7 +2,7 @@
 
 > Fitness application that helps people keep track of the eating and exercise habits
 
-![](./eatfit-github.gif)
+![](./eatfit.gif)
 
 ## Getting Started ✨
 

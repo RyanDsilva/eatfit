@@ -3,7 +3,7 @@ import 'dart:io';
 import 'dart:async';
 
 class API {
-  static final String url = 'https://30e1e3a9.ngrok.io';
+  static final String url = 'https://4f5c4edb.ngrok.io';
   static BaseOptions opts = BaseOptions(
     baseUrl: url,
     responseType: ResponseType.json,

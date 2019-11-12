@@ -1,6 +1,5 @@
 import 'package:eatfit/components/root.dart';
 import 'package:eatfit/views/auth.dart';
-import 'package:eatfit/views/chat.dart';
 import 'package:eatfit/views/exercise/doExercise.dart';
 import 'package:eatfit/views/exercise/exerciseHome.dart';
 import 'package:eatfit/views/food.dart';
@@ -62,14 +61,6 @@ class FluroRouter {
     },
   );
 
-  static Handler _chatHandler = Handler(
-    handlerFunc: (BuildContext context, Map<String, dynamic> params) {
-      return Root(
-        child: Chat(),
-      );
-    },
-  );
-
   static Handler _doExerciseHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, dynamic> params) {
       return Root(
@@ -115,11 +106,6 @@ class FluroRouter {
     router.define(
       'food',
       handler: _foodHandler,
-      transitionType: TransitionType.cupertino,
-    );
-    router.define(
-      'chat',
-      handler: _chatHandler,
       transitionType: TransitionType.cupertino,
     );
     router.define(

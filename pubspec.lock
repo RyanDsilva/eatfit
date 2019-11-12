@@ -111,13 +111,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_dialogflow:
-    dependency: "direct main"
-    description:
-      name: flutter_dialogflow
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.1.2"
   flutter_launcher_icons:
     dependency: "direct dev"
     description:
@@ -137,20 +130,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.5.21+7"
-  googleapis_auth:
-    dependency: transitive
-    description:
-      name: googleapis_auth
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.2.10"
-  http:
-    dependency: transitive
-    description:
-      name: http
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.11.3+17"
   http_parser:
     dependency: transitive
     description:

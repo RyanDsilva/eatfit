@@ -16,7 +16,6 @@ dependencies:
   cloud_firestore: ^0.12.9+3
   image_picker: ^0.6.1+4
   circle_wave_progress: ^0.0.4
-  flutter_dialogflow: ^0.1.2
   location: ^2.3.5
   audioplayers: ^0.7.8
   intl: ^0.16.0
